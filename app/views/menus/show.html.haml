@@ -15,11 +15,19 @@
       =course.name
       =course.price
 
-  %h2 Your order
+
   -unless @current_order.nil?
-    =@current_order.first_course.name
-    =@current_order.second_course.name
-    =@current_order.drink.name
+    %h2 Your order
+    %ul
+      %li#first
+        =@current_order.first_course.name
+        =@current_order.first_course.price
+      %li#second
+        =@current_order.second_course.name
+        =@current_order.second_course.price
+      %li#drink
+        =@current_order.drink.name
+        =@current_order.drink.price
   -if @menu.day == Time.zone.today
     = form_for @order do |f|
       = hidden_field_tag(:day,value: Time.zone.today)
