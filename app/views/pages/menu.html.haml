@@ -1,0 +1,5 @@
+%div.container
+  -@menus.each do |menu|
+    %ul
+      %li
+        =link_to menu.day, menu_path(menu.id)

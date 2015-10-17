@@ -1,0 +1,10 @@
+- content_for(:title, 'Edit user')
+%div.container
+
+  -@user.each do |user|
+    %ul
+      %li
+        username:
+        =user.name
+        email:
+        =user.email

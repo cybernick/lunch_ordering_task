@@ -1,0 +1,29 @@
+%div.container
+  %h2 First course
+  -@first_courses.each  do |course|
+    %p
+      =course.name
+      =course.price
+  %h2 Second course
+  -@second_courses.each  do |course|
+    %p
+      =course.name
+      =course.price
+  %h2 Drinks
+  -@drink_courses.each  do |course|
+    %p
+      =course.name
+      =course.price
+
+  %h2 Your order
+  -unless @current_order.nil?
+    =@current_order.first_course.name
+    =@current_order.second_course.name
+    =@current_order.drink.name
+  -if @menu.day == Time.zone.today
+    = form_for @order do |f|
+      = hidden_field_tag(:day,value: Time.zone.today)
+      = select_tag(:first_course_id, options_for_select(@first_course_options))
+      = select_tag(:second_course_id, options_for_select(@second_course_options))
+      = select_tag(:drink_id, options_for_select(@drink_options))
+      =f.submit

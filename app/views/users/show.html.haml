@@ -1,0 +1,11 @@
+- content_for(:title, 'Edit user')
+%div.container
+  %h1 Your Profile
+  %h3
+    Username
+  =@user.name
+  %h3
+    Email
+  =@user.email
+  %h3
+    = link_to "Change your profile", edit_user_registration_path

@@ -1,0 +1,23 @@
+%div.container
+  -@orders.each do |order|
+    %ul
+      %li
+        User:
+        =order.user.name
+      %li
+        First course:
+        =order.first_course.name
+        price:
+        =order.first_course.price
+      %li
+        Second course:
+        =order.second_course.name
+        price:
+        =order.second_course.price
+      %li
+        Drink:
+        =order.drink.name
+        price:
+        =order.drink.price
+  %h2 Total Cost
+  =@total_cost
