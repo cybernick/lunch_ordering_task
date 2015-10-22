@@ -1,5 +1,5 @@
 namespace :db do
-  desc "Fill database with data"
+  desc 'Fill database with data'
   task populate: :environment do
     make_users
     make_menu
@@ -12,17 +12,21 @@ end
 def make_users
   username = "user-#{1}"
   email = "user-#{1}@lunch.org"
+  org_email = "org-#{1}@lunch.org"
   password  = "password"
+
+  @organization = Organization.create(name: 'Organization',email: org_email,password: password,
+      password_confirmation: password)
   User.create(name: username,email:    email,
                password: password,
-               password_confirmation: password, admin: true)
+               password_confirmation: password, admin: true, organization_id: @organization.id)
   9.times do |n|
     username = "user-#{n+2}"
     email = "user-#{n+2}@lunch.org"
     password  = "password"
     User.create(name: username,email:    email,
                  password: password,
-                 password_confirmation: password, admin: false)
+                 password_confirmation: password, admin: false, organization_id: @organization.id)
   end
 end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151014110812) do
+ActiveRecord::Schema.define(version: 20151022111817) do
 
   create_table "drinks", force: :cascade do |t|
     t.string   "name"
@@ -72,6 +72,27 @@ ActiveRecord::Schema.define(version: 20151014110812) do
   add_index "orders", ["second_course_id"], name: "index_orders_on_second_course_id"
   add_index "orders", ["user_id"], name: "index_orders_on_user_id"
 
+  create_table "organizations", force: :cascade do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "name"
+    t.string   "auth_token",             default: ""
+  end
+
+  add_index "organizations", ["auth_token"], name: "index_organizations_on_auth_token", unique: true
+  add_index "organizations", ["email"], name: "index_organizations_on_email", unique: true
+  add_index "organizations", ["reset_password_token"], name: "index_organizations_on_reset_password_token", unique: true
+
   create_table "second_courses", force: :cascade do |t|
     t.string   "name"
     t.float    "price"
@@ -102,6 +123,7 @@ ActiveRecord::Schema.define(version: 20151014110812) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.boolean  "admin",                  default: false
+    t.integer  "organization_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
