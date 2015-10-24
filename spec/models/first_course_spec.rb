@@ -17,4 +17,5 @@ describe FirstCourse do
     first_course.valid?
     expect(first_course.errors[:price]).to include("can't be blank")
   end
+  it { should validate_numericality_of(:price).is_greater_than_or_equal_to(0) }
 end

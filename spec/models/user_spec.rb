@@ -3,6 +3,7 @@ require 'rails_helper'
 
 describe User do
   it { should respond_to(:orders) }
+  it { should belong_to :organization }
   it 'is a admin as first registered user' do
     create(:user)
     expect(User.first.admin?).to be_truthy

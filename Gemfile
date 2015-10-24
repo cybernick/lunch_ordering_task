@@ -6,7 +6,8 @@ gem 'autoprefixer-rails'
 gem 'simple_calendar'
 #Api gems
 gem 'shoulda-matchers'
-gem 'active_model_serializers'
+gem 'shoulda', '~> 3.5'
+gem 'active_model_serializers', github: 'rails-api/active_model_serializers', branch: '0-8-stable'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
 # Use sqlite3 as the database for Active Record

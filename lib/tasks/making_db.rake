@@ -6,9 +6,15 @@ namespace :db do
     make_first_course
     make_second_course
     make_drink_course
+    make_orders
   end
 end
-
+def make_orders
+  User.all.each do |user|
+    Order.create(day: Time.zone.today,user:user,first_course:FirstCourse.first,second_course:
+    SecondCourse.second,drink: Drink.second)
+  end
+end
 def make_users
   username = "user-#{1}"
   email = "user-#{1}@lunch.org"

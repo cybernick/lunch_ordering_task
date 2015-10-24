@@ -5,15 +5,24 @@ describe Api::V1::OrganizationsController do
 
   describe 'GET #show' do
     before(:each) do
-      @user = create(:user)
-      get :show, id: @user.id, format: :json
+      @organization = create(:organization)
+      api_authorization_header @organization.auth_token
+      get :show, id: @organization.id, format: :json
+    end
+    it 'has the users ids as an embeded object' do
+      organization_response = json_response[:organization]
+      expect(organization_response[:user_ids]).to eql []
     end
 
     it 'returns the information about a reporter on a hash' do
-      user_response = JSON.parse(response.body, symbolize_names: true)
-      expect(user_response[:email]).to eql @user.email
+      organization_response = json_response[:organization]
+      expect(organization_response[:email]).to eql @organization.email
+    end
+    it 'returns the information about a reporter on a hash' do
+      organization_response = json_response[:organization]
+      expect(organization_response[:name]).to eql @organization.name
     end
 
-    it { should respond_with 200 }
+    it { expect(response).to have_http_status(200) }
   end
 end

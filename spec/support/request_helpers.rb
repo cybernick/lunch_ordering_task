@@ -10,6 +10,9 @@ module Request
     def api_header(version = 1)
       request.headers['Accept'] = "application/lunchorder.v#{version}"
     end
+    def api_authorization_header(token)
+      request.headers['Authorization'] =  token
+    end
 
     def api_response_format(format = Mime::JSON)
       request.headers['Accept'] = "#{request.headers['Accept']},#{format}"

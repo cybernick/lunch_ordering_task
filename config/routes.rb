@@ -29,17 +29,20 @@ Rails.application.routes.draw do
   resource :first_courses
   resource :second_courses
   resource :drinks
-  resources :orders
+
 
   namespace :api, defaults: { format: :json },
             constraints: { subdomain: 'api' }, path: '/'  do
     scope module: :v1,
           constraints: ApiConstraints.new(version: 1, default: true) do
       resources :organizations, :only => [:show]
+      resources :users, :only => [:show, :index]
       resources :sessions, :only => [:create, :destroy]
+      resources :orders, :only => [:index]
       # We are going to list our resources here
     end
   end
+  resources :orders
   resources :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
