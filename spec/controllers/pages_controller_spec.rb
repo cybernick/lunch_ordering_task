@@ -6,29 +6,31 @@ describe PagesController do
         @admin = create(:admin)
         sign_in @admin
       end
-        it 'assigns the requested @order to Order.current(Time.zone.today)' do
-          order = create(:order,user: @admin)
-          get :today
-          expect(assigns(:orders)).to eq Order.current(Time.zone.today)
-        end
-        it 'assigns the requested total_cost to Order.total_cost' do
-          order = create(:order,user: @admin)
-          get :today
-          expect(assigns(:total_cost)).to eq Order.total_cost
-        end
+
+      it 'assigns the requested @order to Order.current(Time.zone.today)' do
+        get :today
+        expect(assigns(:orders)).to eq Order.today_orders
+      end
+
+      it 'assigns the requested total_cost to Order.total_cost' do
+        get :today
+        expect(assigns(:total_cost)).to eq Order.total_cost
+      end
     end
+
     describe 'GET #order' do
       before :each do
         @admin = create(:admin)
         sign_in @admin
       end
+
       it 'assigns the requested @menus to Menu.all' do
-        menu = create(:menu)
         get :order
         expect(assigns(:menus)).to eq Menu.all
       end
     end
   end
+
   shared_examples 'private access to pages' do
     describe 'GET #menu' do
       before :each do
@@ -36,7 +38,6 @@ describe PagesController do
         sign_in @admin
       end
         it 'assigns the requested @menus to Menu.all' do
-          menu = create(:menu)
           get :menu
           expect(assigns(:menus)).to eq Menu.all
         end
@@ -68,15 +69,18 @@ describe PagesController do
       end
     end
   end
+
   describe 'admin access to pages' do
     before :each do
       @user = create(:admin)
       sign_in @user
     end
+
     it_behaves_like 'full access to pages'
     it_behaves_like 'private access to pages'
     it_behaves_like 'public pages'
   end
+
   describe 'user access to menus' do
     before :each do
       @user = create(:user)
@@ -101,6 +105,7 @@ describe PagesController do
       end
     end
   end
+
   describe 'guest access to menus' do
     it_behaves_like 'public pages'
     describe 'GET #menu' do

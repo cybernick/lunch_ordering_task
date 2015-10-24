@@ -26,9 +26,10 @@ Rails.application.routes.draw do
 
   resources :menus
   resource :items
-  resource :first_courses
-  resource :second_courses
-  resource :drinks
+  resources :courses
+  resources :first_courses, controller: 'courses', type: 'FirstCourse'
+  resources :second_courses, controller: 'courses', type: 'SecondCourse'
+  resources :drinks, controller: 'courses', type: 'Drink'
 
 
   namespace :api, defaults: { format: :json },

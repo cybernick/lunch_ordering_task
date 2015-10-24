@@ -3,16 +3,14 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  belongs_to :organization
-  has_many :orders
   after_create :set_admin
 
+  belongs_to :organization
+  has_many :orders
+
   private
+
   def set_admin
-    if  User.count == 1
-      User.first.update_attribute(:admin, true)
-    else
-      return true
-    end
+    User.count == 1 ? User.first.update_attribute(:admin, true) : true
   end
 end

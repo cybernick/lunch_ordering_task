@@ -3,9 +3,13 @@ class Organization < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  has_many :users
+
   validates :auth_token, uniqueness: true
+
+  has_many :users
+
   before_create :generate_authentication_token!
+
   def generate_authentication_token!
     begin
       self.auth_token = Devise.friendly_token

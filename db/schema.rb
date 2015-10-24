@@ -11,51 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151023082105) do
+ActiveRecord::Schema.define(version: 20151028124830) do
 
-  create_table "drinks", force: :cascade do |t|
+  create_table "courses", force: :cascade do |t|
     t.string   "name"
     t.float    "price"
+    t.string   "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "drinks_menus", force: :cascade do |t|
+  create_table "courses_menus", force: :cascade do |t|
     t.integer "menu_id"
-    t.integer "drink_id"
+    t.integer "course_id"
   end
 
-  add_index "drinks_menus", ["drink_id"], name: "index_drinks_menus_on_drink_id"
-  add_index "drinks_menus", ["menu_id"], name: "index_drinks_menus_on_menu_id"
-
-  create_table "first_courses", force: :cascade do |t|
-    t.string   "name"
-    t.float    "price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "first_courses_menus", force: :cascade do |t|
-    t.integer "menu_id"
-    t.integer "first_course_id"
-  end
-
-  add_index "first_courses_menus", ["first_course_id"], name: "index_first_courses_menus_on_first_course_id"
-  add_index "first_courses_menus", ["menu_id"], name: "index_first_courses_menus_on_menu_id"
+  add_index "courses_menus", ["course_id"], name: "index_courses_menus_on_course_id"
+  add_index "courses_menus", ["menu_id"], name: "index_courses_menus_on_menu_id"
 
   create_table "menus", force: :cascade do |t|
     t.date     "day"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-  create_table "menus_second_courses", force: :cascade do |t|
-    t.integer "menu_id"
-    t.integer "second_course_id"
-  end
-
-  add_index "menus_second_courses", ["menu_id"], name: "index_menus_second_courses_on_menu_id"
-  add_index "menus_second_courses", ["second_course_id"], name: "index_menus_second_courses_on_second_course_id"
 
   create_table "orders", force: :cascade do |t|
     t.date     "day"
@@ -92,21 +70,6 @@ ActiveRecord::Schema.define(version: 20151023082105) do
   add_index "organizations", ["auth_token"], name: "index_organizations_on_auth_token", unique: true
   add_index "organizations", ["email"], name: "index_organizations_on_email", unique: true
   add_index "organizations", ["reset_password_token"], name: "index_organizations_on_reset_password_token", unique: true
-
-  create_table "second_courses", force: :cascade do |t|
-    t.string   "name"
-    t.float    "price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "second_courses_menus", force: :cascade do |t|
-    t.integer "menu_id"
-    t.integer "second_course_id"
-  end
-
-  add_index "second_courses_menus", ["menu_id"], name: "index_second_courses_menus_on_menu_id"
-  add_index "second_courses_menus", ["second_course_id"], name: "index_second_courses_menus_on_second_course_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

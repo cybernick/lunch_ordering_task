@@ -19,32 +19,32 @@
       =course.name
       =course.price
   %h2 Plese submit new first course meal
-  = form_for @first_course, url: first_courses_path do |f|
+  = form_for @course, url: first_courses_path do |f|
     = f.label :name
     = f.text_field :name, autofocus: true
 
     = f.label :price
     = f.text_field :price, autofocus: true
 
-    = f.submit "Submit" ,name: 'sub'
+    = f.submit 'Submit'
   %h2 Plese submit new second course meal
-  = form_for @second_course, url: second_courses_path do |f|
+  = form_for @course, url: second_courses_path do |f|
     = f.label :name
     = f.text_field :name, autofocus: true
 
     = f.label :price
     = f.text_field :price, autofocus: true
 
-    = f.submit "Submit"
+    = f.submit 'Submit'
   %h2 Plese submit drink
-  = form_for @drink_course, url: drinks_path do |f|
+  = form_for @course, url: drinks_path do |f|
     = f.label :name
     = f.text_field :name, autofocus: true
 
     = f.label :price
     = f.text_field :price, autofocus: true
 
-    = f.submit "Submit"
+    = f.submit 'Submit'
 
 
 

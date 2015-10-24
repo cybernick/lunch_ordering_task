@@ -5,19 +5,19 @@ class Order < ActiveRecord::Base
   belongs_to :second_course
   belongs_to :drink
 
-  def total
-    first_course.price.to_f + second_course.price.to_f + drink.price.to_f
-  end
-  def self.current(day)
-    where(day:  day)
-  end
-  def self.total_cost
-    @day = Time.zone.today
-    @orders = Order.current(@day)
-    @total_cost = 0
-    @orders.each do |order|
-      @total_cost = @total_cost + order.total
+  scope :today_orders, -> { where(day: Time.zone.today) }
+
+  class << self
+    def course_price_sum(course)
+      today_orders.includes(course).sum(:price)
     end
-    return @total_cost
+
+    def any_day_orders(day)
+      where(day: day)
+    end
+
+    def total_cost
+      course_price_sum(:first_course) + course_price_sum(:second_course) + course_price_sum(:drink)
+    end
   end
 end

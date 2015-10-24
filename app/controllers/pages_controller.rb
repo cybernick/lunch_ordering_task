@@ -7,17 +7,20 @@ class PagesController < ApplicationController
 
   def help
   end
+
   def menu
     @menus = Menu.all
   end
+
   def order
     @menus = Menu.all
   end
+
   def today
-    @day = Time.zone.today
-    @orders = Order.where(day: @day)
+    @orders = Order.today_orders
     @total_cost = Order.total_cost
   end
+
   def contact
   end
 
@@ -25,6 +28,7 @@ class PagesController < ApplicationController
   end
   
   private
+
   def admin
     redirect_to(root_url) unless current_user.admin?
   end

@@ -9,18 +9,21 @@ describe ItemsController do
         get :show
         expect(assigns(:first_courses)).to match_array([first_course,second_first_course])
       end
+
       it 'redirects to items#show' do
         get :show
         expect(response).to render_template :show
       end
     end
   end
+
   describe 'user access to menus' do
-    before :each do
+    before do
       @user = create(:user)
       @user = create(:user)
       sign_in @user
     end
+
     describe 'GET #show' do
       it 'response to root_url' do
         get :show
@@ -28,11 +31,13 @@ describe ItemsController do
       end
     end
   end
+
   describe 'admin access to menus' do
     before :each do
       @user = create(:admin)
       sign_in @user
     end
+
     it_behaves_like 'full access to Items'
   end
 

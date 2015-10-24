@@ -2,14 +2,12 @@ require 'rails_helper'
 
 describe Api::V1::SessionsController do
   describe 'POST #create' do
-
     before(:each) do
       @organization = create(:organization)
     end
 
     context 'when the credentials are correct' do
-
-      before(:each) do
+      before :each do
         credentials = { email: @organization.email, password: 'password' }
         post :create, { session: credentials }
       end
@@ -23,8 +21,7 @@ describe Api::V1::SessionsController do
     end
 
     context 'when the credentials are incorrect' do
-
-      before(:each) do
+      before :each do
         credentials = { email: @organization.email, password: 'invalidpassword' }
         post :create, { session: credentials }
       end
@@ -36,8 +33,8 @@ describe Api::V1::SessionsController do
       it { should respond_with 422 }
     end
   end
-  describe 'DELETE #destroy' do
 
+  describe 'DELETE #destroy' do
     before(:each) do
       @organization = create(:organization)
       sign_in @organization
@@ -45,6 +42,5 @@ describe Api::V1::SessionsController do
     end
 
     it { should respond_with 204 }
-
   end
 end

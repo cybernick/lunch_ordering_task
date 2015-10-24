@@ -29,7 +29,6 @@ describe Api::V1::UsersController do
       expect(users_response.length).to eq(4)
     end
 
-
     it { expect(response).to have_http_status(200) }
   end
 end

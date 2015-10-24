@@ -8,6 +8,7 @@ describe UsersController do
         expect(assigns(:user)).to eq User.all
       end
     end
+
     describe 'GET #show' do
       it 'assigns the requested user to eq @user' do
         @user = create(:user)
@@ -23,12 +24,14 @@ describe UsersController do
       @user = create(:user)
       sign_in @user
     end
+
     describe 'GET #show' do
       it 'response to template show' do
         get :show, id: @user
         expect(response).to render_template :show
       end
     end
+
     describe 'GET #index' do
       it 'response to root_path' do
         get :index
@@ -42,6 +45,7 @@ describe UsersController do
       @user = create(:admin)
       sign_in @user
     end
+
     it_behaves_like 'full access to User'
   end
 
@@ -53,6 +57,7 @@ describe UsersController do
         expect(response).to redirect_to new_user_session_path
       end
     end
+
     describe 'GET #index' do
       it 'response to root_path' do
         get :index

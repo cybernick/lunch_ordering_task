@@ -79,8 +79,8 @@ feature 'User behavior' do
     scenario 'add courses for today menu' do
       click_link 'Add meals to Menu'
       expect(current_path).to eq items_show_path
-      find('#new_first_course' ).fill_in 'Name', with: 'Borsch'
-      find('#new_first_course' ).fill_in 'Price', with: '123.0'
+      first('#new_course' ).fill_in 'Name', with: 'Borsch'
+      first('#new_course' ).fill_in 'Price', with: '123.0'
 
       first(:button, 'Submit').click
       expect(page).to have_content 'Borsch'
